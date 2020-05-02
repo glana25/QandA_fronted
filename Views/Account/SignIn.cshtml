@@ -1,0 +1,24 @@
+﻿@model User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignIn</title>
+</head>
+<body>
+    <h3>Sign in</h3>
+    <form asp-controller="Account" asp-action="Authorize" method="post">
+        <label>Username</label>
+        <input type="text" asp-for="Username" />
+        <label>Password</label>
+        <input type="password" asp-for="Password" />
+        <button type="submit">Sign in</button>
+    </form>
+    
+</body>
+</html>
