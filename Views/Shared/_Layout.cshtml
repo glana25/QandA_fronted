@@ -6,38 +6,93 @@
     <title>@ViewData["Title"] - QandA_lesson1</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #F7F8FA;
+        }
+
+        .navigation {
+            position: fixed;
+            box-sizing: border-box;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #E3E2E2;
+            box-shadow: 0 3px 7px 0 rgba(110, 112, 114, 0.21);
+        }
+
+        .search {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue',sans-serif;
+            font-size: 16px;
+            padding: 8px 10px;
+            border: 1px solid #E3E2E2;
+            border-radius: 3px;
+            color: #5C5A5A;
+            background-color: white;
+            width: 200px;
+            height: 30px;
+        }
+
+        .btn-signin {
+            font-family: 'Segoe UI','Helvetica Neue',sans-serif;
+            font-size: 16px;
+            padding: 5px 10px;
+            background-color: transparent;
+            color: #5C5A5A;
+            webkit-text-decoration: none;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .text {
+            border: none;
+            padding: 0px;
+            padding-top: 25px;
+            padding-left: 310px;
+        }
+
+        .contener {
+            width: 80%;
+            margin: auto;
+        }
+
+        .box {
+            background-color: #F7F8FA;
+            border-top: 5px rgba(245, 192, 17, 0.836) solid;
+            color: #5C5A5A;
+            background-color: white;
+            padding-top: 0px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QandA_lesson1</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Signout">Sign out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div class="navigation">
+        <div>
+            <b>Q & A</b> <span>development</span>
+        </div>
+        <input class="search" type="text" placeholder="Search" />
+        <a href="#" class="btn-signin"> <i class="fas fa-user-secret"></i> Sign in</a>
+    </div>
+    <div>
+        <br>
+        <br>
+
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - QandA_lesson1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
