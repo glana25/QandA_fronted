@@ -5,15 +5,15 @@
 
 <div class="header">
     <h5>UNANSWERED QUESTIONS</h5>
-    <button class="primary-button">Ask a question</button>
+    <a asp-controller="Home" asp-action="Ask" class="primary-button">Ask a question</a>
 </div>
 
 
 @{ foreach (var question in Model)
     {
         <div class="box">
-            <h3> @question.Text</h3>
-            <p>There seem to be a fair few state management tools...</p>
+            <h3><a asp-controller="Home" asp-action="Answers" asp-route-id="@question.Id">@question.Title</a></h3>
+            <p>@question.Text</p>
             <p><i>Asked by @question.User.Username (opens in new tab) on <time> 05/18/2019 2:48:00 PM</time></i></p>
         </div>
     }

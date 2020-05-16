@@ -51,7 +51,7 @@ namespace QandA_lesson1
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}"); // http://localhost:500/Home/Index/gregre
             });
         }
     }

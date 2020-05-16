@@ -1,9 +1,9 @@
-﻿
+﻿@model AskQuestionModel
 @{
     ViewData["Title"] = "Ask";
 }
 
-@section header {
+@section Header {
     <style>
         fieldset {
         }
@@ -19,19 +19,25 @@
     </style>
 }
 
+@section Scripts {
+    <script>
+        console.log(123);
+    </script>
+}
+
 <h1>Ask</h1>
 
 <div>
-    <form>
+    <form asp-controller="Home" asp-action="Ask">
         <fieldset>
             <label>
                 Title
             </label>
-            <input />
+            <input type="text" asp-for="Title"/>
             <label>
                 Content
             </label>
-            <textarea></textarea>
+            <textarea asp-for="Content"></textarea>
             <div>
                 <button type="submit">Submit</button>
             </div>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -31,9 +32,34 @@ namespace QandA_lesson1.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Ask()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Ask(AskQuestionModel askQuestion)
+        {
+            //Save to database
+            _qandAContext.Questions.Add(new Question
+            {
+                DateCreated = DateTime.Now,
+                Text = askQuestion.Content,
+                Title = askQuestion.Title,
+                UserId = 1
+            });
+
+            _qandAContext.SaveChanges();
+            // Redirect to home/index
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Answers(int id)
+        {
+            Question question = _qandAContext.Questions.FirstOrDefault(q => q.Id == id);
+            return View(question);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
