@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using QandA_lesson1.Models;
 
 namespace QandA_lesson1.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -58,6 +60,7 @@ namespace QandA_lesson1.Controllers
         [HttpGet]
         public IActionResult Answers(int id)
         {
+
             Question question = _qandAContext.Questions.FirstOrDefault(q => q.Id == id);
             return View(question);
         }
