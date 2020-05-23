@@ -4,17 +4,100 @@
 }
 
 @section Header {
-    <style>
-        fieldset {
+    <style type="text/css">
+        .conteiner {
+            padding-top: 20px;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            align-items: center;
         }
 
-        label {
+        h3 {
+            text-align: center;
         }
 
-        input {
+        .box {
+            background-color: rgb(163, 159, 159);
+            font-size: center;
+            background-color: rgb(240, 240, 240);
+            width: 400px;
+            height: 375px;
+            border-radius: 10px;
+            border-color: grey;
+            border-width: 1px;
+            border-style: solid;
+            box-shadow: 2px 2px 2px #888888
         }
 
-        textarea {
+
+        .border1 {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue',sans-serif;
+            font-size: 16px;
+            padding: 8px 10px;
+            border: 1px solid #E3E2E2;
+            border-radius: 3px;
+            color: black;
+            background-color: white;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        .border2 {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue',sans-serif;
+            font-size: 16px;
+            padding: 8px 10px;
+            border: 1px solid #E3E2E2;
+            border-radius: 3px;
+            color: white;
+            background-color: white;
+            width: 365px;
+            height: 100px;
+            border-radius: 5px;
+        }
+
+        .primary-button {
+            background-color: #824c67;
+            border-color: #824c67;
+            border-style: solid;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-ask {
+            padding: 20px 15px;
+            background-color: rgb(163, 159, 159);
+            background-color: rgb(240, 240, 240);
+            border-radius: 10px;
+            border-color: #ccc;
+            border-width: 1px;
+            border-style: solid;
+            box-shadow: 2px 2px 2px #888888;
+            min-width: 300px;
+        }
+
+        .line {
+            border-top: 1px solid #ccc;
+            background-color: white;
+            margin: 20px 0px;
+        }
+
+        .form-ask input, .form-ask textarea {
+            border-radius: 3px;
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .form-ask label {
+            margin-bottom: 0px;
         }
     </style>
 }
@@ -25,22 +108,14 @@
     </script>
 }
 
-<h1>Ask</h1>
-
-<div>
-    <form asp-controller="Home" asp-action="Ask">
-        <fieldset>
-            <label>
-                Title
-            </label>
-            <input type="text" asp-for="Title"/>
-            <label>
-                Content
-            </label>
-            <textarea asp-for="Content"></textarea>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </fieldset>
+<div class="conteiner">
+    <h3>ASK A QUESTION</h3>
+    <form asp-controller="Home" asp-action="Ask" class="form-ask">
+        <label>Title</label>
+        <input type="text" style="margin-bottom: 15px;">
+        <label>Context</label>
+        <textarea name="Context"></textarea>
+        <div class="line"></div>
+        <button class="primary-button">Submit Your Question</button>
     </form>
 </div>
