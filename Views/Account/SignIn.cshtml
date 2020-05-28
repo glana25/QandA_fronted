@@ -9,16 +9,71 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SignIn</title>
+    <style type="text/css">
+        .conteiner {
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            align-items: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .form-signIn {
+            padding: 20px 15px;
+            background-color: rgb(163, 159, 159);
+            background-color: rgb(240, 240, 240);
+            border-radius: 10px;
+            border-color: #ccc;
+            border-width: 1px;
+            border-style: solid;
+            box-shadow: 2px 2px 2px #888888;
+            min-width: 300px;
+        }
+
+        .line {
+            border-top: 1px solid #ccc;
+            background-color: white;
+            margin: 20px 0px;
+        }
+
+        .form-signIn input {
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .form-signIn label {
+            margin-bottom: 0px;
+        }
+
+        .submit {
+            background-color: #824c67;
+            border-color: #824c67;
+            border-style: solid;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
-<body>
-    <h3>Sign in</h3>
-    <form asp-controller="Account" asp-action="Authorize" method="post">
-        <label>Username</label>
-        <input type="text" asp-for="Username" />
-        <label>Password</label>
-        <input type="password" asp-for="Password" />
-        <button type="submit">Sign in</button>
-    </form>
-    
-</body>
+
+
+    <div class="conteiner">
+        <h3>Sign in</h3>
+        <form asp-controller="Account" asp-action="Authorize" method="post" class="form-signIn">
+            <label>Username</label>
+            <input type="text" asp-for="Username" style="margin-bottom: 15px;" />
+            <label>Password</label>
+            <input type="password" asp-for="Password" />
+            <div class="line"></div>
+            <button type="submit">Sign in</button>
+        </form>
+    </div>
 </html>
