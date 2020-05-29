@@ -60,20 +60,39 @@
             color: white;
             cursor: pointer;
         }
+
+        .primary-button {
+            background-color: #824c67;
+            border-color: #824c67;
+            border-style: solid;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 5px 10px;
+            color: white;
+        }
+
+        input {
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            background-color: #F7F8FA;
+        }
     </style>
 
 </head>
 
 
-    <div class="conteiner">
-        <h3>Sign in</h3>
-        <form asp-controller="Account" asp-action="Authorize" method="post" class="form-signIn">
-            <label>Username</label>
-            <input type="text" asp-for="Username" style="margin-bottom: 15px;" />
-            <label>Password</label>
-            <input type="password" asp-for="Password" />
-            <div class="line"></div>
-            <button type="submit">Sign in</button>
-        </form>
-    </div>
+<div class="conteiner">
+    <h1>Q & A</h1>
+    <form asp-controller="Account" asp-action="Authorize" method="post" class="form-signIn">
+        <label>Username</label>
+        <input type="text" asp-for="Username" style="margin-bottom: 15px;" />
+        <label>Password</label>
+        <input type="password" asp-for="Password" />
+        <div class="line"></div>
+        <button type="submit" class="primary-button">Sign in</button>
+    </form>
+</div>
 </html>
