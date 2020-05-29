@@ -31,7 +31,8 @@
             border-width: 1px;
             border-style: solid;
             box-shadow: 2px 2px 2px #888888;
-            min-width: 300px;
+            min-width: 250px;
+            width: 250px;
         }
 
         .line {
@@ -69,6 +70,14 @@
             font-size: 16px;
             padding: 5px 10px;
             color: white;
+            width: 100%;
+        }
+
+        .signup-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
         }
 
         input {
@@ -93,6 +102,7 @@
         <input type="password" asp-for="Password" />
         <div class="line"></div>
         <button type="submit" class="primary-button">Sign in</button>
+        <a class="signup-button" href="#">New user? Sign Up</a>
     </form>
 </div>
 </html>
