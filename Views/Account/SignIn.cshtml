@@ -89,20 +89,20 @@
             background-color: #F7F8FA;
         }
     </style>
-
 </head>
 
-
-<div class="conteiner">
-    <h1>Q & A</h1>
-    <form asp-controller="Account" asp-action="Authorize" method="post" class="form-signIn">
-        <label>Username</label>
-        <input type="text" asp-for="Username" style="margin-bottom: 15px;" />
-        <label>Password</label>
-        <input type="password" asp-for="Password" />
-        <div class="line"></div>
-        <button type="submit" class="primary-button">Sign in</button>
-        <a class="signup-button" href="#">New user? Sign Up</a>
-    </form>
-</div>
+<body>
+    <div class="conteiner">
+        <h1>Q & A</h1>
+        <form asp-controller="Account" asp-action="Authorize" method="post" class="form-signIn">
+            <label>Username</label>
+            <input type="text" asp-for="Username" style="margin-bottom: 15px;" />
+            <label>Password</label>
+            <input type="password" asp-for="Password" />
+            <div class="line"></div>
+            <button type="submit" class="primary-button">Sign in</button>
+            <a class="signup-button" href="#">New user? Sign Up</a>
+        </form>
+    </div>
+</body>
 </html>
