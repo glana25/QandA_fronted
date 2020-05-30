@@ -28,6 +28,8 @@ namespace QandA_lesson1
             services.AddDbContext<QandAContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<DbHandler>();
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
