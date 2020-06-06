@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using QandA_lesson1.DataStore;
 using QandA_lesson1.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace QandA_lesson1.Controllers
 {
@@ -43,13 +43,16 @@ namespace QandA_lesson1.Controllers
         [HttpPost]
         public IActionResult Ask(AskQuestionModel askQuestion)
         {
+            // User.Identity.Name
+            User userDb = _qandAContext.Users.First(u => u.Username == User.Identity.Name);
+
             //Save to database
             _qandAContext.Questions.Add(new Question
             {
                 DateCreated = DateTime.Now,
                 Text = askQuestion.Content,
                 Title = askQuestion.Title,
-                UserId = 1
+                UserId = userDb.Id
             });
 
             _qandAContext.SaveChanges();
@@ -62,7 +65,7 @@ namespace QandA_lesson1.Controllers
         {
 
             Question question = _qandAContext.Questions.FirstOrDefault(q => q.Id == id);
-            return View(question);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

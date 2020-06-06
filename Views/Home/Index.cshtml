@@ -14,7 +14,7 @@
         <div class="box">
             <h3><a asp-controller="Home" asp-action="Answers" asp-route-id="@question.Id">@question.Title</a></h3>
             <p>@question.Text</p>
-            <p><i>Asked by @question.User.Username (opens in new tab) on <time> 05/18/2019 2:48:00 PM</time></i></p>
+            <p><i>Asked by @question.User.Username on <time>@question.DateCreated</time></i></p>
         </div>
     }
 }

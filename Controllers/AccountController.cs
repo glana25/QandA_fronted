@@ -37,11 +37,23 @@ namespace QandA_lesson1.Controllers
         [HttpPost]
         public async Task<IActionResult> Authorize(QandA_lesson1.Models.UserModel user)
         {
-            var userExists = _qandAContext.Users.Any(u => u.Username == user.Username && u.Password == user.Password);
+            var userExists = _qandAContext.Users.Any(u => u.Username == user.Username);
 
             if (!userExists)
             {
                 ViewBag.Error = "Invalid user";
+                return View("SignIn");
+            }
+
+            var userDb = _qandAContext.Users.First(u => u.Username == user.Username);
+
+           // string encryptedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+           // bool samePassword = encryptedPassword == userDb.Password;
+            bool samePassword = BCrypt.Net.BCrypt.Verify(user.Password, userDb.Password);
+
+            if (!samePassword)
+            {
+                ViewBag.Error = "Invalid credentials";
                 return View("SignIn");
             }
 
@@ -86,16 +98,18 @@ namespace QandA_lesson1.Controllers
                 return View();
             }
 
+            string encryptedPassword = BCrypt.Net.BCrypt.HashPassword(registerUser.Password);
+
             var user = new User()
             {
                 Username = registerUser.Username,
-                Password = registerUser.Password
+                Password = encryptedPassword
             };
 
             _qandAContext.Users.Add(user);
             _qandAContext.SaveChanges();
 
-            return await Authorize(new UserModel { Username = user.Username, Password = user.Password });
+            return await Authorize(new UserModel { Username = user.Username, Password = registerUser.Password });
         }
     }
 }
