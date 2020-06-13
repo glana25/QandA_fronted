@@ -1,10 +1,42 @@
-﻿@model QandA_lesson1.DataStore.Question
+﻿@model QandA_lesson1.Models.AnswersModel
 @{
     ViewData["Title"] = "Answers";
 }
 
-<h1>Answers</h1>
+@section Header {
+<style>
+    .main{
+        background-color: #fff;
+        padding: 15px 20px 20px 20px;
+        margin-top: 40px;
+        border-radius: 4px;
+        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);
+        border: 1px solid #f7f8fa;
+    }
+    .title{
+        font-size: 19px;
+        font-weight:bold;
+    }
+</style>
 
-<div>@Model.Title</div>
-<div>@Model.Text</div>
+}
+<div class="main">
+    <div class="title">@Model.QuestionTitle</div>
+    <div>@Model.QuestionText</div>
+    <p style="margin: 15px 0px"><i>Asked by @Model.QuestionUsername on <time>@Model.QuestionDateCreated</time></i></p>
 
+    @foreach (var answer in Model.QuestionAnswers)
+    {
+        <div class="line"></div>
+        <div>@answer.Text</div>
+        <p style="margin: 15px 0px"><i>Asked by @answer.User.Username on <time>@answer.DateCreated</time></i></p>
+    }
+
+    <form asp-controller="Home" asp-action="Answer" asp-route-id="@Model.QuestionId" class="form-ask">
+        <label>Your Answer</label>
+        <textarea asp-for="Answer"></textarea>
+        <div class="line"></div>
+        <button class="primary-button" type="submit">Submit Your Answer</button>
+    </form>
+
+</div>

@@ -111,6 +111,45 @@
             align-items: center;
             justify-content: space-between;
         }
+
+                .form-ask {
+            padding: 20px 15px;
+            background-color: rgb(163, 159, 159);
+            background-color: rgb(240, 240, 240);
+            border-radius: 10px;
+            border-color: #ccc;
+            border-width: 1px;
+            border-style: solid;
+            box-shadow: 2px 2px 2px #888888;
+            min-width: 300px;
+        }
+
+        .line {
+            border-top: 1px solid #ccc;
+            background-color: white;
+            margin: 20px 0px;
+        }
+
+        .form-ask input, .form-ask textarea {
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .form-ask label {
+            margin-bottom: 0px;
+        }
+
+        .primary-button {
+            background-color: #824c67;
+            border-color: #824c67;
+            border-style: solid;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 
     @RenderSection("Header", false)
@@ -136,11 +175,7 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - QandA_lesson1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

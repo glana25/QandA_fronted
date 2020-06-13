@@ -63,9 +63,40 @@ namespace QandA_lesson1.Controllers
         [HttpGet]
         public IActionResult Answers(int id)
         {
+            Question question = _qandAContext.Questions.Include(q => q.User).FirstOrDefault(q => q.Id == id);
 
-            Question question = _qandAContext.Questions.FirstOrDefault(q => q.Id == id);
-            return View();
+            List<Answer> answersQuestion = _qandAContext.Answers.Include(u=>u.User)
+                                                                .Where(a => a.QuestionId == question.Id)
+                                                                .ToList();        
+            AnswersModel am = new AnswersModel
+            {
+                QuestionId = question.Id,
+                QuestionText = question.Text,
+                QuestionTitle = question.Title,
+                QuestionDateCreated = question.DateCreated,
+                QuestionUsername = question.User.Username,
+                QuestionAnswers = answersQuestion
+            };
+            return View(am);
+        }
+
+        [HttpPost]
+        public IActionResult Answer(int id, string answer)
+        {
+            var user = _qandAContext.Users.First(u => u.Username == this.User.Identity.Name);
+
+            Answer answerDb = new Answer
+            {
+                QuestionId = id,
+                UserId = user.Id,
+                Text = answer,
+                DateCreated = DateTime.Now
+            };
+
+            _qandAContext.Answers.Add(answerDb);
+            _qandAContext.SaveChanges();
+
+            return RedirectToAction(nameof(Answers), new { id});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
