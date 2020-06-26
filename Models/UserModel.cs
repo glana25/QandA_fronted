@@ -1,8 +1,14 @@
-﻿namespace QandA_lesson1.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QandA_lesson1.Models
 {
     public class UserModel
     {
+        [Required]
+        [StringLength (10, MinimumLength = 3)]
         public string Username { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength =3)]
         public string Password { get; set; }
     }
 

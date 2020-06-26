@@ -18,6 +18,11 @@
             <div class="error">@ViewBag.Error</div>
         }
         <div class="line"></div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div asp-validation-summary="All" class="alert alert-danger"></div>
+        }
+
         <button type="submit" class="primary-button">Submit</button>
     </form>
 </div>

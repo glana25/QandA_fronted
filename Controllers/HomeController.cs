@@ -41,8 +41,12 @@ namespace QandA_lesson1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Ask(AskQuestionModel askQuestion)
+        public IActionResult Ask(AskQuestionModel askQuestion)// HOme/Index
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             // User.Identity.Name
             User userDb = _qandAContext.Users.First(u => u.Username == User.Identity.Name);
 
@@ -63,6 +67,7 @@ namespace QandA_lesson1.Controllers
         [HttpGet]
         public IActionResult Answers(int id)
         {
+        
             Question question = _qandAContext.Questions.Include(q => q.User).FirstOrDefault(q => q.Id == id);
 
             List<Answer> answersQuestion = _qandAContext.Answers.Include(u=>u.User)
@@ -77,19 +82,23 @@ namespace QandA_lesson1.Controllers
                 QuestionUsername = question.User.Username,
                 QuestionAnswers = answersQuestion
             };
-            return View(am);
+            return View("Answers",am);  // am it's model
         }
 
         [HttpPost]
-        public IActionResult Answer(int id, string answer)
+        public IActionResult Answer(int id, [FromForm]AnswersModel answerModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return Answers(id);   // here we are calling method Answers [HttpGet]
+            }
             var user = _qandAContext.Users.First(u => u.Username == this.User.Identity.Name);
 
             Answer answerDb = new Answer
             {
                 QuestionId = id,
                 UserId = user.Id,
-                Text = answer,
+                Text = answerModel.Answer,
                 DateCreated = DateTime.Now
             };
 

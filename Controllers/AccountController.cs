@@ -21,6 +21,7 @@ namespace QandA_lesson1.Controllers
         }
 
         // .../account/signin
+        [HttpGet]
         public IActionResult SignIn()
         {
             return View();
@@ -35,8 +36,12 @@ namespace QandA_lesson1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Authorize(QandA_lesson1.Models.UserModel user)
+        public async Task<IActionResult> SignIn(QandA_lesson1.Models.UserModel user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var userExists = _qandAContext.Users.Any(u => u.Username == user.Username);
 
             if (!userExists)
@@ -84,6 +89,10 @@ namespace QandA_lesson1.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUser registerUser)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             if(registerUser.Password != registerUser.ConfirmPassword)
             {
                 ViewBag.Error = "Password doesn't match";
@@ -109,7 +118,7 @@ namespace QandA_lesson1.Controllers
             _qandAContext.Users.Add(user);
             _qandAContext.SaveChanges();
 
-            return await Authorize(new UserModel { Username = user.Username, Password = registerUser.Password });
+            return await SignIn(new UserModel { Username = user.Username, Password = registerUser.Password });
         }
     }
 }
