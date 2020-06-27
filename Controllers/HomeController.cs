@@ -43,6 +43,11 @@ namespace QandA_lesson1.Controllers
         [HttpPost]
         public IActionResult Ask(AskQuestionModel askQuestion)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             // User.Identity.Name
             User userDb = _qandAContext.Users.First(u => u.Username == User.Identity.Name);
 
@@ -63,11 +68,17 @@ namespace QandA_lesson1.Controllers
         [HttpGet]
         public IActionResult Answers(int id)
         {
-            Question question = _qandAContext.Questions.Include(q => q.User).FirstOrDefault(q => q.Id == id);
+           
+            return View("Answers",BuildAnswersModel(id));
+        }
 
-            List<Answer> answersQuestion = _qandAContext.Answers.Include(u=>u.User)
+       private AnswersModel BuildAnswersModel(int questionId)
+        {
+            Question question = _qandAContext.Questions.Include(q => q.User).FirstOrDefault(q => q.Id == questionId);
+
+            List<Answer> answersQuestion = _qandAContext.Answers.Include(u => u.User)
                                                                 .Where(a => a.QuestionId == question.Id)
-                                                                .ToList();        
+                                                                .ToList();
             AnswersModel am = new AnswersModel
             {
                 QuestionId = question.Id,
@@ -77,26 +88,33 @@ namespace QandA_lesson1.Controllers
                 QuestionUsername = question.User.Username,
                 QuestionAnswers = answersQuestion
             };
-            return View(am);
+            return am;
         }
-
         [HttpPost]
-        public IActionResult Answer(int id, string answer)
+        public IActionResult Answer(int id, [FromForm]AnswersModel answerModel)
         {
+            if (!ModelState.IsValid)
+            {
+                //return our View and pass our paramethers
+                return View("Answers", BuildAnswersModel(id));// becaouse our method is name is Answer but View hane is Answers, so we need specify the View Answers
+                //return Answers(id);
+
+            }
+
             var user = _qandAContext.Users.First(u => u.Username == this.User.Identity.Name);
 
             Answer answerDb = new Answer
             {
                 QuestionId = id,
                 UserId = user.Id,
-                Text = answer,
+                Text = answerModel.Answer,
                 DateCreated = DateTime.Now
             };
 
             _qandAContext.Answers.Add(answerDb);
             _qandAContext.SaveChanges();
 
-            return RedirectToAction(nameof(Answers), new { id});
+            return RedirectToAction(nameof(Answers), new {id});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

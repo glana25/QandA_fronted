@@ -20,6 +20,7 @@ namespace QandA_lesson1.Controllers
             _qandAContext = qandAContext;
         }
 
+        [HttpGet]
         // .../account/signin
         public IActionResult SignIn()
         {
@@ -35,8 +36,15 @@ namespace QandA_lesson1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Authorize(QandA_lesson1.Models.UserModel user)
+        public async Task<IActionResult> SignIn(QandA_lesson1.Models.UserModel user)
         {
+            if (!ModelState.IsValid)// that code need will show mistack
+            {
+                return View();//  we do not need write the what is view hasd inside , because method name SighIn and will take sighIn //old use have to be full with new
+              
+            }
+
+
             var userExists = _qandAContext.Users.Any(u => u.Username == user.Username);
 
             if (!userExists)
@@ -84,6 +92,10 @@ namespace QandA_lesson1.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUser registerUser)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             if(registerUser.Password != registerUser.ConfirmPassword)
             {
                 ViewBag.Error = "Password doesn't match";
@@ -109,7 +121,7 @@ namespace QandA_lesson1.Controllers
             _qandAContext.Users.Add(user);
             _qandAContext.SaveChanges();
 
-            return await Authorize(new UserModel { Username = user.Username, Password = registerUser.Password });
+            return await SignIn(new UserModel { Username = user.Username, Password = registerUser.Password });
         }
     }
 }

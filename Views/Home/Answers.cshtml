@@ -32,11 +32,16 @@
         <p style="margin: 15px 0px"><i>Asked by @answer.User.Username on <time>@answer.DateCreated</time></i></p>
     }
 
-    <form asp-controller="Home" asp-action="Answer" asp-route-id="@Model.QuestionId" class="form-ask">
-        <label>Your Answer</label>
-        <textarea asp-for="Answer"></textarea>
-        <div class="line"></div>
-        <button class="primary-button" type="submit">Submit Your Answer</button>
-    </form>
+<form asp-controller="Home" asp-action="Answer" asp-route-id="@Model.QuestionId" class="form-ask">
+    <label>Your Answer</label>
+    <textarea asp-for="Answer"></textarea>
+    <div class="line"></div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+
+        <div asp-validation-summary="All" class="alert alert-danger "></div>
+    }
+    <button class="primary-button" type="submit">Submit Your Answer</button>
+</form>
 
 </div>

@@ -6,7 +6,7 @@
 
 <div class="conteiner">
     <h1>Q & A</h1>
-    <form asp-controller="Account" asp-action="Authorize" method="post" class="form-signIn">
+    <form asp-controller="Account" asp-action="SignIn" method="post" class="form-signIn">
         <label>Username</label>
         <input type="text" asp-for="Username" style="margin-bottom: 15px;" autocomplete="off" />
         <label>Password</label>
@@ -15,7 +15,16 @@
         {
             <div class="error">@ViewBag.Error</div>
         }
+
         <div class="line"></div>
+
+        @if(!ViewData.ModelState.IsValid)
+        {
+            
+             <div asp-validation-summary="All" class="alert alert-danger"></div>
+        }
+       
+       
         <button type="submit" class="primary-button">Sign in</button>
         <a class="signup-button" asp-controller="Account" asp-action="Register">New user? Sign Up</a>
     </form>

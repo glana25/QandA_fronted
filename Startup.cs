@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QandA_lesson1.DataStore;
+using QandA_lesson1.Extensions;
 
 namespace QandA_lesson1
 {
@@ -36,7 +37,9 @@ namespace QandA_lesson1
                     options.LoginPath = "/Account/SignIn";
                 });
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews()
+                     .AddRazorRuntimeCompilation()
+                     .AddDataAnnotationsLocalization();// it is connect with .net Core and show misstacks
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +59,7 @@ namespace QandA_lesson1
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.EnsureSeeded();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
