@@ -41,9 +41,8 @@ namespace QandA_lesson1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Ask(AskQuestionModel askQuestion)
+        public IActionResult Ask(AskQuestionModel askQuestion)// HOme/Index
         {
-
             if (!ModelState.IsValid)
             {
                 return View();
@@ -68,13 +67,13 @@ namespace QandA_lesson1.Controllers
         [HttpGet]
         public IActionResult Answers(int id)
         {
-           
             return View("Answers",BuildAnswersModel(id));
         }
 
        private AnswersModel BuildAnswersModel(int questionId)
         {
             Question question = _qandAContext.Questions.Include(q => q.User).FirstOrDefault(q => q.Id == questionId);
+
 
             List<Answer> answersQuestion = _qandAContext.Answers.Include(u => u.User)
                                                                 .Where(a => a.QuestionId == question.Id)
@@ -89,6 +88,7 @@ namespace QandA_lesson1.Controllers
                 QuestionAnswers = answersQuestion
             };
             return am;
+
         }
         [HttpPost]
         public IActionResult Answer(int id, [FromForm]AnswersModel answerModel)
@@ -98,8 +98,8 @@ namespace QandA_lesson1.Controllers
                 //return our View and pass our paramethers
                 return View("Answers", BuildAnswersModel(id));// becaouse our method is name is Answer but View hane is Answers, so we need specify the View Answers
                 //return Answers(id);
-
             }
+
 
             var user = _qandAContext.Users.First(u => u.Username == this.User.Identity.Name);
 

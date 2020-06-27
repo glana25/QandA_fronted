@@ -17,6 +17,7 @@
         }
 
         <div class="line"></div>
+<<<<<<< HEAD
 
         @if(!ViewData.ModelState.IsValid)
         {
@@ -25,6 +26,12 @@
         }
        
        
+=======
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div asp-validation-summary="All" class="alert alert-danger "></div>
+        }
+>>>>>>> 0c048e398dcd67d860d27cb9e1d6df87868cd79a
         <button type="submit" class="primary-button">Sign in</button>
         <a class="signup-button" asp-controller="Account" asp-action="Register">New user? Sign Up</a>
     </form>

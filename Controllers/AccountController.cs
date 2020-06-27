@@ -22,6 +22,7 @@ namespace QandA_lesson1.Controllers
 
         [HttpGet]
         // .../account/signin
+        [HttpGet]
         public IActionResult SignIn()
         {
             return View();
@@ -38,13 +39,10 @@ namespace QandA_lesson1.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(QandA_lesson1.Models.UserModel user)
         {
-            if (!ModelState.IsValid)// that code need will show mistack
+            if (!ModelState.IsValid)
             {
-                return View();//  we do not need write the what is view hasd inside , because method name SighIn and will take sighIn //old use have to be full with new
-              
+                return View();
             }
-
-
             var userExists = _qandAContext.Users.Any(u => u.Username == user.Username);
 
             if (!userExists)
