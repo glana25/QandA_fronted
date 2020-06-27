@@ -34,17 +34,10 @@
         <textarea name="Content" asp-for="Content"></textarea>
 
         <div class="line"></div>
-<<<<<<< HEAD
 
-        @if (!ViewData.ModelState.IsValid)
-        {
-
-            <div asp-validation-summary="All" class="alert alert-danger mt-4"></div>
-=======
         @if (!ViewData.ModelState.IsValid)
         {
             <div asp-validation-summary="All" class="alert alert-danger "></div>
->>>>>>> 0c048e398dcd67d860d27cb9e1d6df87868cd79a
         }
         <button class="primary-button" type="submit">Submit Your Question</button>
     </form>
