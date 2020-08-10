@@ -9,14 +9,29 @@
 </div>
 
 
-@{ foreach (var question in Model)
-    {
-        <div class="box">
-            <h3><a asp-controller="Home" asp-action="Answers" asp-route-id="@question.Id">@question.Title</a></h3>
-            <p>@question.Text</p>
-            <p><i>Asked by @question.User.Username on <time>@question.DateCreated</time></i></p>
-        </div>
-    }
+@section Scripts{ 
+<script>
+$.ajax({
+         type: "GET",
+         url: "http://localhost:5002/api/questions",
+         contentType: "application/json",
+         success: function (results) {
+             for (var i = 0; i < results.length; i++) {
+                 var question = results[i];
+                 $("#questions").append(`
+                   <div class="box">
+                        <h3><a href="Home/Answers/${question.id}">${question.title}</a></h3>
+                        <p>${question.text}</p>
+                        <p><i>Asked by ${question.user.username} on <time>${question.dateCreated}</time></i></p>
+                    </div>
+`);
+             }
+         },
+         error: function (statusCode, error) {
+             console.log(statusCode, error);
+         }
+     });
+</script>
 }
 
 
